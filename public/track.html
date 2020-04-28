@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/track.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title></title>
+  </head>
+  <body>
+    <header class="main-header">
+      <h3>COVID-19</h3>
+    </header>
+    <main>
+
+      <div class="content">
+        <div class="total">
+          <div>
+            <h2>Total</h2>
+            <span class="total-time"></span>
+          </div>
+          <div class="total-confirm">
+            <h3>Confirmed</h3>
+            <h4 class="total-confirm-nos">--</h4>
+            <div id="chartContainer"></div>
+          </div>
+          <div class="total-active">
+            <h3>Recover</h3>
+            <h4 class="total-recover-nos">--</h4>
+            <div id="chartContainerRecovered"></div>
+          </div>
+          <div class="total-deceased">
+            <h3>Deceased</h3>
+            <h4 class="total-deceased-nos">--</h4>
+            <div id="chartContainerDeaths"></div>
+          </div>
+          <div id="chartContainer"></div>
+
+
+
+        </div>
+
+
+        <div class="state-wise">
+
+          <div class="state">
+            <h2 class="state-name">State</h2>
+            <span class="time"></span>
+          </div>
+          <div class="confirm">
+            <h3>Confirmed</h3>
+            <h4 class="confirm-nos">--</h4>
+          </div>
+          <div class="active">
+            <h3>Active</h3>
+            <h4 class="active-nos">--</h4>
+          </div>
+          <div class="deceased">
+            <h3>Deceased</h3>
+            <h4 class="deceased-nos">--</h4>
+          </div>
+          <div id="map"></div>
+
+        </div>
+
+        <div class="list">
+
+          <!-- <div class="slide"> -->
+            <button class="left-button" type="button" name="button"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            <button class="right-button" type="button" name="button"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+          <!-- </div> -->
+          <ol class="state-list">
+
+          </ol>
+          <!-- <h3>list</h3> -->
+        </div>
+      </div>
+
+
+
+      <!-- <footer class="footer">thanks</footer> -->
+    </main>
+    <!-- <footer class="main-footer"></footer> -->
+    <script id="state-template" type="text/template">
+          {{{newli}}}
+          <!-- <li class= "state-list-item" {{{code}}} > -->
+
+
+            <div class="state-title">
+              <h3>{{state}}</h3>
+              <span>{{time}}</span>
+            </div>
+            <div class="state-body">
+              <div><p>{{confirmed}}</p><h5>Total confirmed</h5></div><hr>
+              <div><p>{{recovered}}</p><h5>Total recovered</h5></div><hr>
+              <div><p>{{deaths}}</p><h5>Total deaths</h5></div>
+            </div>
+            <div class="percentage"><div class="per-confirm"></div><div class="per-recovered"></div><div class="per-death"></div></div>
+          </li>
+    </script>
+  <script src="/js/libs/mapdata.js" charset="utf-8"></script>
+  <script src="/js/libs/countrymap.js" charset="utf-8"></script>
+  <script src="/js/track.js"></script>
+  <script src="/js/libs/jquery-3.4.1.min.js"></script>
+    <script src="/js/libs/moment.js"></script>
+    <script src="js/libs/deparam.js"></script>
+    <script src="/js/libs/mustache.js"></script>
+    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
+    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
+    <script src="/js/libs/jquery.canvasjs.min.js"></script>
+  </body>
+</html>
