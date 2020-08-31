@@ -276,11 +276,33 @@ if (window.matchMedia('(min-width: 40rem)').matches) {
     const json = await result.json();
     var obj = json.find((item) => item.state === iso.name);
     console.log(obj);
-    var next = document.querySelector(`.${code}`).nextSibling;
-    var prev = document.querySelector(`.${code}`).previousSibling;
-    next.scrollIntoView();
-    // prev.scrollIntoView();
-    // jQuery(`.list`).animate({scrollLeft: jQuery(`.${code}`).offset()},20);
+    // var query = jQuery(`.${code}`);
+    // var next = query.next();
+    // var prev = query.prev();
+    // var lastLeftLocation = query.offset();
+    // var listLocation = jQuery('.list').offset();
+    // if(listLocation.left - lastLeftLocation.left > 30){
+    //   // jQuery(`.list`).animate({scrollLeft: next.offset().left},20);
+    //   document.querySelector(`.${code}`).nextSibling.scrollIntoView();
+    // }
+    // else{
+    //   jQuery(`.list`).animate({scrollLeft: query.offset().left},20);
+    // }
+    document.querySelector(`.${code}`).scrollIntoView(true);
+    setTimeout(()=>{
+      var query = document.querySelector(`.${code}`);
+      var lastLeftLocation = query.getBoundingClientRect();
+      var lastLocation = document.querySelector('body').getBoundingClientRect();
+      if(lastLocation.right - lastLeftLocation.right < 10){
+        document.querySelector(`.list`).scrollLeft += 400;
+      }
+      if(lastLeftLocation.left - lastLocation.left  < 10){
+        document.querySelector('.list').scrollLeft -= 400;
+      }
+    },1000);
+
+    // var listLocation = jQuery('.list').offset()
+    // jQuery(`.${code}`).animate({scrollLeft: jQuery(`.${code}`).offset().left},20);
     document.querySelector(`.${code}`).classList.add('mystyle');
     jQuery('.left-button').fadeIn(3000);
 

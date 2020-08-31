@@ -1,6 +1,6 @@
 function returnSize() {
   if(window.matchMedia('(min-width: 40rem)').matches){
-    return '500';
+    return '400';
   }
   else {
     return '300';
