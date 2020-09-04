@@ -1,17 +1,17 @@
+var json;
 
 
 window.addEventListener('load', async ()=>{
-  const iso = 1;
-  const data = {iso};
   const options = {
     method: 'POST',
-    body: JSON.stringify(data),
+    // body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json'
     }
   };
   const result = await fetch('/all',options);
-  const json = await result.json();
+  json = await result.json();
+  json = json.filter((item)=> item.state !== "State Unassigned");
   var total = json.find((item) => item.state === "Total");
   var time = total.lastupdatedtime;
   var format = moment(time, "DD/MM/YYYY kk:mm:ss").fromNow();
@@ -35,9 +35,6 @@ window.addEventListener('load', async ()=>{
             deaths:item.deaths,
             time: `updated ${format}`
           };
-
-
-
           var templ = '<li class= "state-list-item {{code}}" ><div class="state-title"><h3>{{state}}</h3><span>{{time}}</span></div><div class="state-body"><div><p>{{confirmed}}</p><h5>Total confirmed</h5></div><hr><div><p>{{recovered}}</p><h5>Total recovered</h5></div><hr><div><p>{{deaths}}</p><h5>Total deaths</h5></div></div><div class="percentage"><div class="per-confirm per-{{code}}-confirm"></div><div class="per-recovered per-{{code}}-recovered"></div><div class="per-death per-{{code}}-death"></div></div></li>'
           var html = Mustache.render(templ,person);
           jQuery('.state-list').append(html);
@@ -65,9 +62,6 @@ window.addEventListener('load', async ()=>{
 
     // var last = document.querySelector('.state-list-item').
   });
-  // jQuery('.right-button').fadeIn(3000);
-  // jQuery('.right-button').css({"display" : "inline-block"});
-
 });
 
 window.onload = async function() {
@@ -262,20 +256,9 @@ if (window.matchMedia('(min-width: 40rem)').matches) {
   simplemaps_countrymap.hooks.over_state =async function(id){
 
     const iso = simplemaps_countrymap_mapdata.state_specific[id];
-    code = iso.iso;
-    console.log(iso);
-    const data = {id,iso};
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    const result = await fetch('/all',options);
-    const json = await result.json();
     var obj = json.find((item) => item.state === iso.name);
-    console.log(obj);
+    code = iso.iso;
+    console.log(code);
     // var query = jQuery(`.${code}`);
     // var next = query.next();
     // var prev = query.prev();
@@ -296,14 +279,14 @@ if (window.matchMedia('(min-width: 40rem)').matches) {
       if(lastLocation.right - lastLeftLocation.right < 10){
         document.querySelector(`.list`).scrollLeft += 400;
       }
-      if(lastLeftLocation.left - lastLocation.left  < 10){
+      if(lastLeftLocation.left - lastLocation.left <= 10){
         document.querySelector('.list').scrollLeft -= 400;
       }
     },1000);
 
     // var listLocation = jQuery('.list').offset()
     // jQuery(`.${code}`).animate({scrollLeft: jQuery(`.${code}`).offset().left},20);
-    document.querySelector(`.${code}`).classList.add('mystyle');
+    document.querySelector(`.${code}`).classList.add('myStyle');
     jQuery('.left-button').fadeIn(3000);
 
 
@@ -332,27 +315,17 @@ if (window.matchMedia('(min-width: 40rem)').matches) {
     // document.querySelector(".state-list-item:nth-child(even)").scrollIntoView(true);
   });
 
-
 }
 else {
   simplemaps_countrymap.hooks.click_state= async function(id){
     const iso = simplemaps_countrymap_mapdata.state_specific[id];
     code = iso.iso;
     console.log(iso);
-    const data = {id,iso};
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    const result = await fetch('/all',options);
-    const json = await result.json();
+
     var obj = json.find((item) => item.state === iso.name);
     console.log(obj);
     document.querySelector(`.${code}`).scrollIntoView(true);
-    // document.querySelector(`.${code}`).classLis  t.add('mystyle');
+    document.querySelector(`.${code}`).classList.add('myStyle');
     jQuery('.left-button').fadeIn(3000);
 
     var time = obj.lastupdatedtime;
@@ -386,8 +359,9 @@ else {
   });
 
 }
+
 simplemaps_countrymap.hooks.out_state =async function(id){
   const iso = simplemaps_countrymap_mapdata.state_specific[id];
   code = iso.iso;
-  document.querySelector(`.${code}`).classList.remove('mystyle');
+  document.querySelector(`.${code}`).classList.remove('myStyle');
 };

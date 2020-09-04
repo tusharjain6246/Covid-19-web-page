@@ -30,8 +30,6 @@ app.use(express.json({limit:'1mb'}));
 //   });
 // });
 app.post('/all',(req,res)=>{
-  const iso = req.body.iso;
-  console.log(iso);
   request({
     url:`https://api.covid19india.org/data.json`,
     json: true,
@@ -52,7 +50,7 @@ app.post('/date',(req,res)=>{
     json: true
   },(error,response,body)=>{
     var data = body.states_daily;
-    // console.log(data);
+    console.log(data);
     res.json(data);
   });
 });

@@ -41,11 +41,11 @@ overflow: hidden;
   color: rgba(66,135,173,1);
   padding:-1px;
   display: block;
-  width: 10vw;
+  width: 20vw;
   font-family: monospace;
   font-size: 3rem;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  white-space: nowrap; /* Keeps the content on a single line */
+  overflow: hidden; /* Ensures content is not revealed until animation */
+  white-space: nowrap; /* Keep content in a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: 1px; /* Adjust as needed */
 animation:
@@ -54,7 +54,7 @@ animation:
 }
 @keyframes typing {
   from { width: 0 }
-  to { width: 110px }
+  to { width: 150px }
 }
 
 /* The typewriter cursor effect */
